@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Project Hope — حكاية شخصية، ذكرى ورا ذكرى.">
+    <meta name="theme-color" content="#050505">
+
+    <title>Project Hope ❤️</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+
+    <!-- Fonts: Markazi Text (display) + Cairo (body) — both support Arabic and Latin script -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chapters.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/finale.css">
+    <link rel="stylesheet" href="css/epilogue.css">
+
+</head>
+
+<body>
+
+    <!-- ===================================== -->
+    <!-- Preloader -->
+    <!-- ===================================== -->
+
+    <div class="preloader">
+
+        <div class="preloader-mark">
+
+            <span class="preloader-glyph"></span>
+            <span class="preloader-word">Project Hope</span>
+            <span class="preloader-bar"></span>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- Starry Descent Transition -->
+    <!-- ===================================== -->
+
+    <div class="descent">
+
+        <div class="descent-stars"></div>
+
+    </div>
+
+    <main id="app">
+
+        <!-- ===================================== -->
+        <!-- Opening -->
+        <!-- ===================================== -->
+
+        <section class="opening">
+
+            <!--
+                Optional cinematic background video.
+                Drop a file at assets/videos/hero.mp4 and it will
+                fade in automatically — otherwise this stays hidden
+                and the gradient background (below) is used instead.
+            -->
+            <video class="opening-video" id="hero-video" muted loop playsinline preload="none">
+                <source src="assets/videos/hero.mp4" type="video/mp4">
+            </video>
+
+            <div class="opening-overlay"></div>
+
+            <div class="light floating"></div>
+
+            <div class="opening-content">
+
+                <span class="opening-date">
+
+                    منذ 01 / 02 / 2021
+
+                </span>
+
+                <h1 id="intro-text"></h1>
+
+                <p class="opening-subtitle">
+
+                    كل حاجة هتشوفها هنا حصلت بجد... وكل صورة ورسالة ليها ذكرى.
+
+                </p>
+
+                <button id="start-btn">
+
+                    ابدأ الحكاية ❤️
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===================================== -->
+        <!-- Chapter 01 -->
+        <!-- First Chat -->
+        <!-- ===================================== -->
+
+        <section class="first-chat" id="first-chat">
+
+        </section>
+
+    </main>
+
+    <!--
+        Optional ambient background music.
+        Drop a file at assets/audio/ambient.mp3 and this button
+        appears automatically once it's confirmed playable.
+    -->
+    <audio id="ambient-audio" loop preload="none">
+        <source src="assets/audio/firstrecord.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="sound-toggle" id="sound-toggle" aria-label="تشغيل/إيقاف الموسيقى">
+        🔈
+    </button>
+
+
+    <!-- ===================================== -->
+    <!-- Final Chapter — the Questionnaire       -->
+    <!-- Hidden overlay; revealed only for Malak -->
+    <!-- after the cinematic ending transition.  -->
+    <!-- ===================================== -->
+
+    <div class="finale-chapter" id="finale-chapter" hidden>
+
+        <!-- Custom cursor -->
+        <div class="cursor" aria-hidden="true"></div>
+        <div class="cursor-dot" aria-hidden="true"></div>
+
+        <!-- Ambient background: gradient wash + particle canvas -->
+        <div class="atmosphere" aria-hidden="true">
+            <div class="atmosphere__gradient"></div>
+            <canvas id="particle-canvas"></canvas>
+            <div class="atmosphere__rays"></div>
+        </div>
+
+        <!-- Ambient music control -->
+        <button id="mute-toggle" class="mute-toggle" type="button" aria-pressed="false" aria-label="تشغيل الموسيقى الهادئة">
+            <span class="mute-toggle__icon" aria-hidden="true"></span>
+        </button>
+
+        <main class="app">
+
+            <!-- Header: heart + progress + chapter indicator -->
+            <header class="journey-header">
+                <div class="heart-wrap" aria-hidden="true">
+                    <svg class="heart-svg" viewBox="0 0 100 100">
+                        <defs>
+                            <radialGradient id="finaleHeartGlow" cx="50%" cy="45%" r="60%">
+                                <stop offset="0%" stop-color="var(--heart-core)"/>
+                                <stop offset="100%" stop-color="var(--heart-edge)"/>
+                            </radialGradient>
+                        </defs>
+                        <path id="heart-path" d="M50 88 C15 65 2 40 12 22 C20 8 42 8 50 26 C58 8 80 8 88 22 C98 40 85 65 50 88 Z" fill="url(#finaleHeartGlow)"/>
+                    </svg>
+                    <div class="heart-particles" id="heart-particles"></div>
+                </div>
+
+                <div class="progress-track" role="progressbar" aria-label="تقدّم الرحلة" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+
+                <div class="chapter-indicator" id="chapter-indicator">
+                    <span class="chapter-label" id="chapter-label">الذكرى 1</span>
+                    <div class="chapter-dots" id="chapter-dots"></div>
+                </div>
+            </header>
+
+            <!-- Question stage: exactly one question lives here at a time -->
+            <section class="stage" id="stage" aria-live="polite">
+                <!-- question view injected by finale-ui.js -->
+            </section>
+
+            <!-- Navigation: previous only. Yes/No answers auto-advance. -->
+            <nav class="stage-nav" id="stage-nav">
+                <button type="button" class="btn-prev" id="btn-prev" aria-label="السؤال السابق">
+                    <span aria-hidden="true">‹</span> رجوع
+                </button>
+            </nav>
+
+            <!-- Ending sequence -->
+            <section class="finale-ending" id="ending" hidden>
+                <div class="finale-ending__collecting" id="ending-collecting">
+                    <p class="finale-ending__text" id="ending-status-text">تُجمع الذكريات...</p>
+                    <div class="finale-ending__gather" id="ending-gather"></div>
+                </div>
+                <div class="finale-ending__reveal" id="ending-reveal" hidden>
+                    <div class="finale-ending__heart">
+                        <svg viewBox="0 0 100 100" class="finale-ending__heart-svg">
+                            <path d="M50 88 C15 65 2 40 12 22 C20 8 42 8 50 26 C58 8 80 8 88 22 C98 40 85 65 50 88 Z"/>
+                        </svg>
+                    </div>
+                    <p class="finale-ending__sent-text">تم الإرسال ❤️</p>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- Libraries -->
+    <!-- ===================================== -->
+
+    <!-- GSAP -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+
+    <!-- ScrollTrigger -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+
+    <!-- Typed -->
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Main JS -->
+
+    <script src="js/preloader.js"></script>
+    <script src="js/cinematic.js"></script>
+    <script src="js/audio-manager.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/opening.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/call.js"></script>
+    <script src="js/media.js"></script>
+    <script src="js/regret.js"></script>
+    <script src="js/ambient.js"></script>
+
+    <!-- Chapter Zero — Auth Gate -->
+    <script src="js/auth.js"></script>
+
+    <!-- Final Chapter — the Questionnaire (dormant until unlocked) -->
+    <script src="js/finale-questions.js"></script>
+    <script src="js/finale-sounds.js"></script>
+    <script src="js/finale-animations.js"></script>
+    <script src="js/finale-progress.js"></script>
+    <script src="js/finale-ui.js"></script>
+    <script src="js/finale-app.js"></script>
+
+    <!-- Ending → Finale transition + ending chapter (must load after
+         finale scripts so ending.js's final button can call into them) -->
+    <script src="js/finale-transition.js"></script>
+    <script src="js/ending.js"></script>
+
+    <!-- The Epilogue — the true final chapter, opened by the
+         Questionnaire once the answers have been sent -->
+
+    <script src="js/epilogue.js"></script>
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

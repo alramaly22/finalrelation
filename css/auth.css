@@ -1,0 +1,291 @@
+/* =========================================================
+   Project Hope — Chapter Zero (Auth Gate)
+   + Ending → Finale cinematic transition
+   + Rejection scene
+========================================================= */
+
+/* ---------------------------------------------------------
+   Auth Gate
+--------------------------------------------------------- */
+
+.auth-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: var(--void);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.auth-stars {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+}
+
+.auth-star {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--ink);
+    animation: authTwinkle 4.5s ease-in-out infinite;
+}
+
+@keyframes authTwinkle {
+    0%, 100% { opacity: .25; }
+    50% { opacity: .9; }
+}
+
+.auth-line {
+    position: absolute;
+    max-width: 640px;
+    padding: 0 var(--space-md);
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    color: var(--ink);
+    letter-spacing: .01em;
+    line-height: 1.6;
+}
+
+.auth-card {
+    position: relative;
+    z-index: 2;
+    width: min(92vw, 420px);
+    padding: var(--space-xl) var(--space-lg) var(--space-lg);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: var(--shadow-deep);
+    text-align: center;
+    overflow: hidden;
+}
+
+.auth-card-glow {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    width: 320px;
+    height: 320px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, var(--glow-dim) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.auth-eyebrow {
+    position: relative;
+    display: inline-block;
+    color: var(--glow);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: .72rem;
+    margin-bottom: var(--space-sm);
+}
+
+.auth-title {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--ink);
+    margin: 0 0 var(--space-2xs);
+}
+
+.auth-subtitle {
+    position: relative;
+    color: var(--ink-muted);
+    font-size: .95rem;
+    margin: 0 0 var(--space-lg);
+}
+
+.auth-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: right;
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+}
+
+.auth-field span {
+    font-size: .8rem;
+    color: var(--ink-faint);
+}
+
+.auth-field input {
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: .95rem;
+    transition: .3s var(--ease-soft);
+}
+
+.auth-field input:focus {
+    outline: none;
+    border-color: var(--glow-soft);
+    background: rgba(255, 255, 255, .06);
+    box-shadow: 0 0 0 3px var(--glow-dim);
+}
+
+.auth-submit {
+    margin-top: var(--space-xs);
+    padding: 15px 20px;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: .35s var(--ease-soft);
+}
+
+.auth-submit:hover {
+    background: var(--glow);
+    border-color: var(--glow);
+    color: #1a1206;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px var(--glow-dim);
+}
+
+.auth-submit.is-loading {
+    opacity: .6;
+    pointer-events: none;
+}
+
+.auth-submit:disabled {
+    cursor: default;
+}
+
+.auth-error {
+    margin: 0;
+    color: #e88a8a;
+    font-size: .85rem;
+}
+
+
+/* ---------------------------------------------------------
+   Ending → Finale cinematic transition
+--------------------------------------------------------- */
+
+.chapter-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    background: var(--void);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.chapter-transition.is-active {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.chapter-transition-stars {
+    position: absolute;
+    inset: 0;
+}
+
+.chapter-transition-lines {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+    padding: 0 var(--space-md);
+    text-align: center;
+}
+
+.chapter-transition-line {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    color: var(--ink);
+    line-height: 1.9;
+    opacity: 0;
+}
+
+
+/* ---------------------------------------------------------
+   Rejection scene (shown when a non-Malak account presses
+   the final button)
+--------------------------------------------------------- */
+
+.rejection-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 1600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 5, 5, .82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.rejection-scene.is-active {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.rejection-card {
+    position: relative;
+    width: min(90vw, 460px);
+    padding: var(--space-xl) var(--space-lg);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    box-shadow: var(--shadow-deep);
+    text-align: center;
+}
+
+.rejection-glyph {
+    font-size: 2.2rem;
+    margin-bottom: var(--space-sm);
+    display: block;
+    opacity: .85;
+}
+
+.rejection-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin: 0 0 var(--space-sm);
+}
+
+.rejection-card p {
+    color: var(--ink-muted);
+    line-height: 1.9;
+    margin: 0 0 var(--space-lg);
+}
+
+.rejection-close {
+    padding: 12px 32px;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    font-size: .9rem;
+    cursor: pointer;
+    transition: .35s var(--ease-soft);
+}
+
+.rejection-close:hover {
+    background: var(--surface-raised-hover);
+    border-color: var(--glow-soft);
+}

@@ -1,0 +1,288 @@
+/* =========================================================
+   Project Hope — The Epilogue
+   The true final chapter. Plays after the Questionnaire's
+   answers are sent, and is the last thing the visitor sees.
+
+   Two fixed layers, both above the Questionnaire (z-index
+   1000) and above the ending → finale transition (1500):
+
+     .epilogue        1700   the chapter itself (stars, script)
+     .epilogue-veil   1750   pure black; carries the three
+                             transition lines on the way in,
+                             and "The End." on the way out
+
+   Every color, font and easing below is inherited from the
+   site's own tokens in variables.css — nothing new is
+   introduced, so this chapter can never drift away visually
+   from the rest of Project Hope.
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   The black veil — transition lines in, "The End." out
+--------------------------------------------------------- */
+
+.epilogue-veil {
+    position: fixed;
+    inset: 0;
+    z-index: 1750;
+    background: var(--void);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.epilogue-veil.is-active {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.epilogue-veil__lines {
+    max-width: 620px;
+    text-align: center;
+}
+
+.epilogue-veil-beat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.epilogue-veil-line {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 4.4vw, 2rem);
+    font-weight: 500;
+    line-height: 1.85;
+    color: var(--ink);
+    opacity: 0;
+}
+
+
+/* ---------- "Project Hope · The End." ---------- */
+
+.epilogue-end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    direction: ltr;
+    text-align: center;
+    opacity: 0;
+}
+
+.epilogue-end[hidden] {
+    display: none;
+}
+
+.epilogue-end__mark {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 5vw, 2.15rem);
+    font-weight: 600;
+    letter-spacing: .14em;
+    color: var(--ink);
+}
+
+/* Drawn open by JS as the last movement in the whole site */
+.epilogue-end__rule {
+    width: 54px;
+    height: 1px;
+    background: var(--glow-line);
+    opacity: .5;
+}
+
+.epilogue-end__word {
+    font-family: var(--font-body);
+    font-size: .72rem;
+    font-weight: 400;
+    letter-spacing: .42em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+}
+
+
+/* ---------------------------------------------------------
+   The chapter itself
+--------------------------------------------------------- */
+
+.epilogue {
+    position: fixed;
+    inset: 0;
+    z-index: 1700;
+    background: radial-gradient(ellipse at 50% 42%, #0b0d14 0%, var(--void) 68%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.epilogue.is-active {
+    visibility: visible;
+}
+
+/* Stars sit behind everything and drift on their own clock */
+.epilogue-stars {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* One candlelight breath behind the words. This is the only
+   warm light in the chapter — it does the work that a dozen
+   small effects would otherwise be asked to do.
+
+   Deliberately full-bleed with a centred gradient rather than
+   a translated box: that leaves `transform` completely free
+   for the slow breathing scale, with nothing to conflict. */
+.epilogue-glow {
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 48%;
+    background: radial-gradient(circle 42vmax at 50% 48%,
+        var(--glow-dim) 0%,
+        rgba(232, 179, 107, .045) 40%,
+        transparent 72%);
+    opacity: .85;
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   The script — the chapter's signature
+
+   The stage is a fixed window with a soft mask at both
+   edges. The script inside it is moved so the sentence
+   currently being spoken always sits at the optical centre;
+   everything already said drifts upward and dissolves into
+   the top edge instead of being cut off by it.
+--------------------------------------------------------- */
+
+.epilogue-stage {
+    position: relative;
+    z-index: 2;
+    width: min(90vw, 760px);
+    height: min(62vh, 620px);
+    overflow: hidden;
+
+    -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, .35) 10%,
+        #000 26%,
+        #000 74%,
+        transparent 100%);
+    mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, .35) 10%,
+        #000 26%,
+        #000 74%,
+        transparent 100%);
+}
+
+.epilogue-script {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: 0 var(--space-xs);
+    will-change: transform;
+}
+
+.epilogue-line {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 4.6vw, 2.1rem);
+    font-weight: 500;
+    line-height: 1.9;
+    text-align: center;
+    color: var(--ink);
+    text-wrap: balance;
+    opacity: 0;
+}
+
+/* The sentence being spoken right now */
+.epilogue-line.is-current {
+    color: var(--ink);
+    text-shadow: 0 0 28px rgba(232, 179, 107, .17);
+}
+
+/* Already spoken — still readable, no longer the subject */
+.epilogue-line.is-past {
+    color: var(--ink-muted);
+    text-shadow: none;
+}
+
+
+/* ---------------------------------------------------------
+   Responsive
+--------------------------------------------------------- */
+
+@media (max-width: 640px) {
+
+    .epilogue-stage {
+        width: 88vw;
+        height: 66vh;
+    }
+
+    .epilogue-script {
+        gap: var(--space-xs);
+    }
+
+    .epilogue-line {
+        line-height: 1.95;
+    }
+
+    .epilogue-veil__lines {
+        max-width: none;
+    }
+
+    /* A phone screen is close to the eye — the same glow reads
+       twice as strong there, so it's pulled back. */
+    .epilogue-glow {
+        background: radial-gradient(circle 62vmax at 50% 48%,
+            rgba(232, 179, 107, .1) 0%,
+            rgba(232, 179, 107, .035) 40%,
+            transparent 72%);
+    }
+
+}
+
+/* Newer mobile browsers: dvh doesn't jump when the address
+   bar hides, so the stage never resizes mid-sentence. */
+@supports (height: 1dvh) {
+
+    .epilogue-stage {
+        height: min(62dvh, 620px);
+    }
+
+    @media (max-width: 640px) {
+
+        .epilogue-stage {
+            height: 66dvh;
+        }
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   Reduced motion — the chapter is a reading experience, so
+   it keeps its fades and loses only the drifting camera,
+   the blur, and the breathing (also handled in JS).
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .epilogue-glow {
+        opacity: .6;
+    }
+
+}

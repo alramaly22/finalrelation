@@ -1,0 +1,1152 @@
+/* =========================================================
+   Project Hope — New Chapters
+   Preloader · Relationship Counter · Hall of Regret ·
+   If I Could Go Back · Final Room · Message Box
+========================================================= */
+
+/* ---------------------------------------------------------
+   Preloader
+--------------------------------------------------------- */
+
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--void);
+}
+
+.preloader-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.preloader-glyph {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--glow);
+    box-shadow: 0 0 30px 10px var(--glow-soft);
+}
+
+.preloader-word {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: .35em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    padding-inline-start: .35em;
+}
+
+.preloader-bar {
+    width: 160px;
+    height: 1px;
+    background: var(--hairline);
+    overflow: hidden;
+    position: relative;
+}
+
+.preloader-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    background: var(--glow-line);
+    transform: translateX(-100%);
+}
+
+.preloader.is-loading .preloader-bar::after {
+    animation: preloaderSweep 1.4s ease-in-out infinite;
+}
+
+@keyframes preloaderSweep {
+    0%   { transform: translateX(-100%); }
+    50%  { transform: translateX(130%); }
+    100% { transform: translateX(280%); }
+}
+
+
+/* ---------------------------------------------------------
+   Starry Descent — the transition between the opening
+   scene and the counter, triggered on "Begin the Journey"
+--------------------------------------------------------- */
+
+.descent {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: radial-gradient(ellipse at 50% 30%, #10131c 0%, var(--void) 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.descent.is-active {
+    visibility: visible;
+}
+
+.descent-stars {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.descent-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: var(--ink);
+    opacity: .7;
+}
+
+
+/* ---------------------------------------------------------
+   Relationship Counter
+--------------------------------------------------------- */
+
+.counter {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--void);
+    position: relative;
+    padding: var(--space-xl) var(--space-md);
+}
+
+.counter-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 45%, var(--glow-dim), transparent 60%);
+    pointer-events: none;
+}
+
+.counter-inner {
+    position: relative;
+    text-align: center;
+    max-width: 620px;
+}
+
+.counter-eyebrow {
+    display: block;
+    font-size: .85rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--space-md);
+}
+
+.counter-number {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 16vw, 11rem);
+    line-height: 1;
+    color: var(--ink);
+    text-shadow: 0 0 60px var(--glow-dim);
+    font-variant-numeric: tabular-nums;
+}
+
+.counter-label {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--glow);
+    margin-top: var(--space-xs);
+}
+
+.counter-caption {
+    margin-top: var(--space-lg);
+    color: var(--ink-muted);
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+
+/* ---------------------------------------------------------
+   Shared: the three quiet rooms
+   (Hall of Regret / If I Could Go Back / Final Room)
+--------------------------------------------------------- */
+
+.room {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-md);
+    position: relative;
+    text-align: center;
+}
+
+.room-inner {
+    max-width: 640px;
+}
+
+.room-eyebrow {
+    display: block;
+    font-size: .8rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-lg);
+}
+
+.room-line {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+    line-height: 1.9;
+    margin-bottom: var(--space-md);
+}
+
+.room-line:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ---- The Things I Never Said: black room, sentences alone ---- */
+
+.never-said-room {
+    background: #000;
+    min-height: 100vh;
+}
+
+.never-said-room .room-inner {
+    max-width: 560px;
+}
+
+.never-said-text {
+    min-height: 3.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.never-said-line {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+    line-height: 1.9;
+    color: rgba(255, 255, 255, .82);
+    opacity: 0;
+}
+
+
+/* ---- Hall of Regret: white room, dims further as the truth lands ---- */
+
+.regret-room {
+    background: #f5f2ec;
+    color: #17150f;
+    position: relative;
+    overflow: hidden;
+}
+
+.regret-dim {
+    position: absolute;
+    inset: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.regret-room .room-inner {
+    position: relative;
+    z-index: 2;
+}
+
+.regret-room .room-eyebrow {
+    color: rgba(23, 21, 15, .45);
+    opacity: 0;
+}
+
+.regret-room .room-line {
+    color: rgba(23, 21, 15, .82);
+    font-weight: 400;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.regret-fragment {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+    line-height: 1.9;
+    color: rgba(23, 21, 15, .85);
+    min-height: 2.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ---- If I Could Go Back: warm dark, reflective ---- */
+
+.goback-room {
+    background: var(--surface);
+}
+
+.goback-room .room-eyebrow {
+    color: var(--glow);
+}
+
+.goback-room .room-line {
+    color: var(--ink-muted);
+}
+
+.goback-list {
+    margin-top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: start;
+}
+
+.goback-item {
+    padding-inline-start: var(--space-md);
+    border-inline-start: 1px solid var(--hairline);
+    color: var(--ink-muted);
+    font-size: 1.05rem;
+    line-height: 1.85;
+}
+
+
+/* ---- Final Room: one chair, a slow beam of daylight ---- */
+
+.final-room {
+    background: linear-gradient(180deg, #14100a 0%, #0c0906 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.final-room-window {
+    position: absolute;
+    top: -10%;
+    inset-inline-start: 8%;
+    width: 46%;
+    height: 130%;
+    z-index: 0;
+    background: linear-gradient(105deg,
+        transparent 0%,
+        rgba(255, 226, 170, .10) 35%,
+        rgba(255, 226, 170, .16) 50%,
+        rgba(255, 226, 170, .08) 65%,
+        transparent 100%);
+    transform: rotate(8deg);
+    filter: blur(2px);
+    animation: sunDrift 26s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes sunDrift {
+    0%, 100% { transform: rotate(8deg) translateX(0); opacity: .7; }
+    50%      { transform: rotate(8deg) translateX(6%); opacity: 1; }
+}
+
+.final-room-floor-glow {
+    position: absolute;
+    bottom: 0;
+    inset-inline-start: 0;
+    width: 60%;
+    height: 22%;
+    z-index: 0;
+    background: radial-gradient(ellipse at 30% 100%, rgba(255, 214, 150, .14), transparent 70%);
+    pointer-events: none;
+}
+
+.final-room .room-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.final-room-chair {
+    font-size: 3.2rem;
+    margin-bottom: var(--space-lg);
+    opacity: .6;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,.5));
+}
+
+.final-room .room-line {
+    color: var(--ink);
+}
+
+.final-room .room-line.is-muted {
+    color: var(--ink-faint);
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .final-room-window {
+        animation: none;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   Message Box
+--------------------------------------------------------- */
+
+.message-box {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-md);
+    background: var(--surface-alt);
+}
+
+.message-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+}
+
+.message-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+.message-card p {
+    color: var(--ink-muted);
+    font-size: .95rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.8;
+}
+
+.message-card textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: .95rem;
+    line-height: 1.7;
+}
+
+.message-card textarea:focus-visible {
+    outline: 2px solid var(--glow);
+    outline-offset: 2px;
+}
+
+.message-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.message-send {
+    background: var(--glow);
+    color: #221808;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-size: .95rem;
+    transition: transform .3s var(--ease-soft), box-shadow .3s var(--ease-soft);
+}
+
+.message-send:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.message-skip {
+    background: transparent;
+    color: var(--ink-faint);
+    font-size: .9rem;
+    padding: 12px 20px;
+}
+
+.message-skip:hover {
+    color: var(--ink-muted);
+}
+
+.message-done {
+    color: var(--glow);
+    font-size: .95rem;
+    margin-top: var(--space-md);
+    opacity: 0;
+}
+
+.message-done.is-visible {
+    opacity: 1;
+}
+.message-error {
+    color: #e08a8a;
+    font-size: .9rem;
+    margin-top: var(--space-sm);
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.message-error.is-visible {
+    opacity: 1;
+    height: auto;
+    margin-top: var(--space-sm);
+}
+@media (max-width: 640px) {
+    .goback-list { text-align: center; }
+    .goback-item { border-inline-start: none; padding-inline-start: 0; }
+}
+
+
+/* ---------------------------------------------------------
+   Ambient particle layer (used across chapters for depth)
+--------------------------------------------------------- */
+
+.ambient-particles {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.ambient-particle {
+    position: absolute;
+    bottom: -10px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--glow);
+    opacity: 0;
+    animation: emberRise linear infinite;
+}
+
+@keyframes emberRise {
+
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0);
+    }
+
+    10% {
+        opacity: .5;
+    }
+
+    90% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) translateX(var(--drift, 20px));
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ambient-particle {
+        animation: none !important;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   Timeline — reimagined as a Memory Book (Stage 3)
+   A closed journal that opens, and pages that turn one
+   at a time — one year per page.
+--------------------------------------------------------- */
+
+.timeline {
+    position: relative;
+    padding: var(--space-2xl) var(--space-md);
+    background: var(--surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timeline-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto var(--space-xl);
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-header span {
+    font-size: .8rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--glow);
+}
+
+.timeline-header h2 {
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    margin: var(--space-xs) 0 var(--space-sm);
+}
+
+.timeline-header p {
+    color: var(--ink-muted);
+    line-height: 1.9;
+}
+
+.memory-book {
+    position: relative;
+    width: min(680px, 100%);
+    aspect-ratio: 4 / 3;
+}
+
+.book-cover {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    background: linear-gradient(160deg, #1b140b, #0d0a06);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-deep);
+    cursor: pointer;
+    z-index: 20;
+    transition: opacity .8s var(--ease-soft), transform .8s var(--ease-soft);
+}
+
+.book-cover.is-open {
+    opacity: 0;
+    transform: scale(.94) translateY(-10px);
+    pointer-events: none;
+}
+
+.book-cover-emblem {
+    font-size: 2.2rem;
+    opacity: .8;
+}
+
+.book-cover h3 {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    color: var(--glow);
+}
+
+.book-cover span {
+    font-size: .85rem;
+    color: var(--ink-faint);
+    letter-spacing: .15em;
+}
+
+.book-stage {
+    position: absolute;
+    inset: 0;
+    perspective: 2400px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-deep);
+    background: #f2ede2;
+}
+
+.book-page {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-lg) var(--space-lg);
+    background: #f2ede2;
+    color: #241d10;
+    backface-visibility: hidden;
+    transform-origin: right center;
+    transition: transform 1.1s cubic-bezier(.65, 0, .35, 1);
+}
+
+[dir="rtl"] .book-page {
+    transform-origin: left center;
+}
+
+.book-page.is-behind {
+    z-index: 1;
+}
+
+.book-page.is-active {
+    z-index: 5;
+}
+
+.book-page.is-turned {
+    transform: rotateY(-160deg);
+}
+
+[dir="rtl"] .book-page.is-turned {
+    transform: rotateY(160deg);
+}
+
+.page-year {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    color: rgba(36, 29, 16, .18);
+    position: absolute;
+    top: var(--space-md);
+    inset-inline-end: var(--space-lg);
+    line-height: 1;
+}
+
+.page-date {
+    font-size: .8rem;
+    letter-spacing: .2em;
+    color: #a3824f;
+    margin-bottom: var(--space-xs);
+}
+
+.page-photo {
+    width: 100%;
+    max-height: 34%;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-sm);
+    box-shadow: 0 12px 30px rgba(0,0,0,.2);
+}
+
+.book-page h3 {
+    font-size: 1.6rem;
+    margin-bottom: var(--space-xs);
+    color: #1c1508;
+}
+
+.book-page p {
+    line-height: 1.85;
+    font-size: 1rem;
+    color: #4a3f2a;
+    max-width: 90%;
+}
+
+.book-page-number {
+    position: absolute;
+    bottom: var(--space-sm);
+    inset-inline-start: var(--space-lg);
+    font-size: .78rem;
+    color: rgba(36, 29, 16, .4);
+    letter-spacing: .1em;
+}
+
+.book-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .6s var(--ease-soft);
+}
+
+.book-nav.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.book-nav button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    color: var(--ink);
+    font-size: 1.1rem;
+    transition: background .3s var(--ease-soft), transform .3s var(--ease-soft);
+}
+
+.book-nav button:hover:not(:disabled) {
+    background: var(--glow);
+    color: #221808;
+    transform: translateY(-2px);
+}
+
+.book-nav button:disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+.book-page-indicator {
+    font-size: .85rem;
+    color: var(--ink-faint);
+    letter-spacing: .1em;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+
+    .memory-book {
+        aspect-ratio: 3 / 4;
+    }
+
+    .book-page {
+        padding: var(--space-md);
+    }
+
+    .page-year {
+        font-size: 2rem;
+    }
+
+}
+
+
+
+/* ---------------------------------------------------------
+   Chat timestamps (Important Conversations)
+--------------------------------------------------------- */
+
+.message {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.message-time {
+    font-size: 10px;
+    opacity: .55;
+    align-self: flex-end;
+}
+
+.her .message-time,
+.system-message .message-time {
+    align-self: flex-start;
+}
+
+
+/* ---------------------------------------------------------
+   Fullscreen Lightbox (Gallery)
+--------------------------------------------------------- */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 7, 5, .88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.lightbox-stage {
+    position: relative;
+    z-index: 2;
+    max-width: min(90vw, 820px);
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 62vh;
+    border-radius: var(--radius-md);
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+    object-fit: contain;
+}
+
+.lightbox-caption {
+    text-align: center;
+    margin-top: var(--space-md);
+    max-width: 520px;
+}
+
+.lightbox-caption h3 {
+    font-size: 1.4rem;
+    margin-bottom: var(--space-xs);
+}
+
+.lightbox-caption p {
+    color: var(--ink-muted);
+    line-height: 1.85;
+    font-size: 1rem;
+}
+
+.lightbox-index {
+    display: block;
+    font-size: .8rem;
+    letter-spacing: .25em;
+    color: var(--ink-faint);
+    margin-bottom: var(--space-xs);
+}
+
+.lightbox-close,
+.lightbox-nav {
+    position: absolute;
+    z-index: 3;
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--hairline);
+    color: var(--ink);
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    transition: background .25s var(--ease-soft), transform .25s var(--ease-soft);
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+    background: rgba(255,255,255,.14);
+    transform: scale(1.06);
+}
+
+.lightbox-close {
+    top: var(--space-md);
+    inset-inline-end: var(--space-md);
+}
+
+.lightbox-prev { inset-inline-start: var(--space-md); top: 50%; transform: translateY(-50%); }
+.lightbox-next { inset-inline-end: var(--space-md); top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 640px) {
+
+    .lightbox-nav { width: 38px; height: 38px; font-size: 1.1rem; }
+    .lightbox-image { max-height: 52vh; }
+
+}
+
+
+/* ---------------------------------------------------------
+   Videos & Voice Notes
+--------------------------------------------------------- */
+
+.media-chapter {
+    padding: var(--space-xl) var(--space-md);
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+}
+
+.media-header {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto var(--space-xl);
+}
+
+.media-header span {
+    font-size: .85rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--glow);
+}
+
+.media-header h2 {
+    margin-top: var(--space-xs);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.media-header p {
+    margin-top: var(--space-sm);
+    color: var(--ink-muted);
+    line-height: 1.8;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+    max-width: 1000px;
+    margin: 0 auto var(--space-xl);
+}
+
+.video-card {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    cursor: pointer;
+}
+
+.video-card video,
+.video-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.75) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-sm);
+}
+
+.video-play {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: auto;
+    margin-top: auto;
+    font-size: 1.2rem;
+    transition: transform .3s var(--ease-soft), background .3s var(--ease-soft);
+}
+
+.video-card:hover .video-play {
+    transform: scale(1.1);
+    background: var(--glow);
+    color: #221808;
+}
+
+.video-card-title {
+    color: var(--ink);
+    font-size: .95rem;
+    font-weight: 500;
+}
+
+/* Fullscreen video player */
+
+.video-player {
+    position: fixed;
+    inset: 0;
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    background: rgba(6,5,4,.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.video-player.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.video-player video {
+    max-width: min(92vw, 900px);
+    max-height: 80vh;
+    border-radius: var(--radius-md);
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+
+.video-player-close {
+    position: absolute;
+    top: var(--space-md);
+    inset-inline-end: var(--space-md);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--hairline);
+    color: var(--ink);
+    font-size: 1.2rem;
+}
+
+/* Voice notes */
+
+.voice-list {
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.voice-note {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm) var(--space-md);
+}
+
+.voice-play {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--glow);
+    color: #221808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.voice-wave {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 32px;
+    overflow: hidden;
+}
+
+.voice-wave span {
+    flex: 1;
+    min-width: 2px;
+    background: var(--ink-faint);
+    border-radius: 2px;
+    transition: background .3s;
+}
+
+.voice-note.is-playing .voice-wave span {
+    background: var(--glow);
+    animation: waveBounce 1s ease-in-out infinite;
+}
+
+.voice-note.is-playing .voice-wave span:nth-child(odd) {
+    animation-delay: .15s;
+}
+
+.voice-note.is-playing .voice-wave span:nth-child(3n) {
+    animation-delay: .3s;
+}
+
+@keyframes waveBounce {
+    0%, 100% { transform: scaleY(.4); }
+    50% { transform: scaleY(1); }
+}
+
+.voice-time {
+    flex-shrink: 0;
+    font-size: .8rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,897 @@
+/* ===========================
+   Reset
+=========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--void);
+    color: var(--ink);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--glow);
+    outline-offset: 4px;
+}
+
+#app {
+    width: 100%;
+}
+
+
+/* ===========================
+   Ambient Sound Toggle
+=========================== */
+
+.sound-toggle {
+    position: fixed;
+    bottom: 28px;
+    left: 28px;
+    z-index: 50;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid var(--hairline);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--ink-muted);
+    opacity: 0;
+    pointer-events: none;
+    transition: .4s var(--ease-soft);
+}
+
+.sound-toggle.is-ready {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sound-toggle:hover {
+    border-color: var(--glow-soft);
+    color: var(--glow);
+    transform: translateY(-2px);
+}
+
+.sound-toggle.is-playing {
+    color: var(--glow);
+    border-color: var(--glow-soft);
+    box-shadow: 0 0 0 0 var(--glow-dim);
+    animation: glowBreathe 3s ease-in-out infinite;
+}
+
+
+/* ===========================
+   Opening
+=========================== */
+
+.opening {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #151515 0%, #090909 55%, #000 100%);
+}
+
+/* Optional cinematic hero video — only shown if assets/videos/hero.mp4 exists */
+.opening-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.6s var(--ease-soft);
+}
+
+.opening-video.is-ready {
+    opacity: .35;
+}
+
+/* Overlay */
+
+.opening-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .25);
+    z-index: 1;
+}
+
+
+/* Light */
+
+.light {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--glow-strong);
+    opacity: 0;
+    box-shadow: 0 0 25px var(--glow-strong), 0 0 60px var(--glow), 0 0 150px var(--glow-soft);
+    z-index: 2;
+}
+
+
+/* Content */
+
+.opening-content {
+    position: relative;
+    z-index: 5;
+    width: min(900px, 90%);
+    text-align: center;
+}
+
+
+/* Date */
+
+.opening-date {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: var(--ink-faint);
+    letter-spacing: 3px;
+    font-size: .95rem;
+}
+
+
+/* Main Title */
+
+#intro-text {
+    min-height: 180px;
+    font-size: clamp(32px, 6vw, 72px);
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: pre-line;
+    font-family: var(--font-display);
+}
+
+/* Description */
+
+.opening-subtitle {
+    width: min(700px, 100%);
+    margin: 35px auto;
+    color: var(--ink-muted);
+    line-height: 2;
+    font-size: 1.1rem;
+}
+
+
+/* Button */
+
+#start-btn {
+    margin-top: 25px;
+    padding: 18px 45px;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    font-size: 17px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: .4s var(--ease-soft);
+}
+
+#start-btn:hover {
+    background: var(--glow);
+    border-color: var(--glow);
+    color: #1a1206;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px var(--glow-dim);
+}
+
+
+/* Scroll lock — active only before the visitor starts the story */
+
+body.scroll-locked {
+    overflow: hidden;
+    height: 100vh;
+}
+
+
+/* ==========================================
+   Section Headers (shared pattern)
+========================================== */
+
+.section-eyebrow {
+    color: var(--ink-faint);
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-size: .85rem;
+}
+
+
+/* ==========================================
+   Chapter 01 — First Chat
+========================================== */
+
+.first-chat {
+    min-height: 100vh;
+    padding: var(--space-2xl) 20px;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    max-width: 640px;
+}
+
+.chat-date {
+    color: var(--ink-faint);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 15px;
+    font-size: .85rem;
+}
+
+.chat-header h2 {
+    font-size: clamp(38px, 6vw, 60px);
+    margin-bottom: 15px;
+}
+
+.chat-header p {
+    color: var(--ink-muted);
+    line-height: 1.8;
+}
+
+.phone {
+    width: 390px;
+    max-width: 95%;
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-soft);
+}
+
+.phone-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px;
+    background: rgba(255, 255, 255, .04);
+    border-bottom: 1px solid var(--hairline);
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.phone-info h3 {
+    font-size: 18px;
+    margin-bottom: 3px;
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.phone-info span {
+    color: var(--ink-muted);
+    font-size: 13px;
+}
+
+#chat-body {
+    height: 620px;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scroll-behavior: smooth;
+}
+
+#chat-body::-webkit-scrollbar {
+    width: 4px;
+}
+
+#chat-body::-webkit-scrollbar-thumb {
+    background: var(--hairline);
+    border-radius: 4px;
+}
+
+.message {
+    max-width: 78%;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    line-height: 1.8;
+    font-size: 15px;
+    word-break: break-word;
+}
+
+.me {
+    align-self: flex-end;
+    background: var(--chat-me);
+    color: #fff;
+    border-bottom-right-radius: 6px;
+}
+
+.her {
+    align-self: flex-start;
+    background: var(--chat-her);
+    color: var(--ink);
+    border-bottom-left-radius: 6px;
+}
+
+.system-message {
+    align-self: center;
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    color: var(--ink-faint);
+    font-size: 13px;
+    filter: blur(2px);
+    transition: .4s;
+}
+
+.system-message:hover {
+    filter: blur(0);
+}
+
+/* Typing indicator bubble inside the chat body (single, de-duplicated definition) */
+.typing {
+    align-self: flex-start;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    background: var(--chat-her);
+    border-radius: var(--radius-md);
+    border-bottom-left-radius: 6px;
+}
+
+.typing span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink-muted);
+    animation: typingDots 1s infinite;
+}
+
+.typing span:nth-child(2) { animation-delay: .2s; }
+.typing span:nth-child(3) { animation-delay: .4s; }
+
+/* Closing line after the conversation plays out */
+.chapter-end {
+    margin-top: var(--space-lg);
+    max-width: 520px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.8;
+}
+
+
+/* ==========================================
+   Chapter 02 — Gallery
+========================================== */
+
+.gallery {
+    min-height: 100vh;
+    padding: var(--space-2xl) 20px;
+    background: var(--surface);
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.gallery-header span {
+    color: var(--ink-faint);
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 15px;
+    font-size: .85rem;
+}
+
+.gallery-header h2 {
+    font-size: clamp(40px, 6vw, 72px);
+    margin-bottom: 20px;
+}
+
+.gallery-header p {
+    color: var(--ink-muted);
+    line-height: 2;
+}
+
+
+/* Grid */
+
+.gallery-grid {
+    max-width: 1300px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+}
+
+
+/* Card */
+
+.photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--surface-alt);
+    cursor: pointer;
+    border: 1px solid var(--hairline);
+    transition: transform .5s var(--ease-soft), box-shadow .5s var(--ease-soft);
+}
+
+.photo-media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s var(--ease-soft);
+}
+
+
+/* Placeholder state — shown automatically when a gallery image fails to load */
+
+.photo-placeholder {
+    display: none;
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    background:
+        radial-gradient(circle at 30% 20%, var(--glow-dim), transparent 60%),
+        linear-gradient(160deg, #16130e, #0c0b09 70%);
+}
+
+.photo-card.is-placeholder img {
+    display: none;
+}
+
+.photo-card.is-placeholder .photo-placeholder {
+    display: flex;
+}
+
+.placeholder-index {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: var(--glow-soft);
+}
+
+.placeholder-icon {
+    font-size: 30px;
+    opacity: .8;
+}
+
+.placeholder-label {
+    font-size: 13px;
+    color: var(--ink-faint);
+    letter-spacing: .5px;
+}
+
+
+/* Overlay */
+
+.photo-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 35px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .85));
+    opacity: 0;
+    transition: .6s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.photo-card:hover .photo-overlay,
+.photo-card:focus-within .photo-overlay {
+    opacity: 1;
+}
+
+.photo-overlay h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.photo-overlay p {
+    color: #d5d5d5;
+    line-height: 1.8;
+}
+
+
+/* Hint */
+
+.photo-hint {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, .08);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, .12);
+    opacity: 0;
+    transform: scale(.7);
+    pointer-events: none;
+}
+
+.hint-icon {
+    font-size: 24px;
+}
+
+.photo-hint span {
+    font-size: 12px;
+    color: #f1f1f1;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+
+/* Hover */
+
+.photo-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .5);
+}
+
+.photo-card:hover img {
+    transform: scale(1.12);
+}
+
+
+/* Varied heights for a masonry feel */
+
+.photo-card:nth-child(1) { height: 650px; }
+.photo-card:nth-child(2) { height: 450px; }
+.photo-card:nth-child(3) { height: 520px; }
+.photo-card:nth-child(4) { height: 700px; }
+
+
+/* ==========================================
+   Chapter 03 — The Call
+========================================== */
+
+.call {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #1a1a1a, #080808, #000);
+    padding: var(--space-xl) 20px;
+}
+
+.phone-call {
+    width: 370px;
+    max-width: 100%;
+    height: 720px;
+    max-height: 85vh;
+    border-radius: 45px;
+    background: var(--surface-raised);
+    border: 1px solid var(--hairline);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-deep);
+}
+
+.incoming {
+    text-align: center;
+    padding: 0 20px;
+}
+
+.call-type {
+    color: var(--ink-faint);
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 35px;
+    font-size: .85rem;
+}
+
+.call-avatar {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--call-gradient-a), var(--call-gradient-b));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+/* Anticipation cue on the incoming-call screen — like a phone visibly ringing */
+.call-avatar.is-ringing::before,
+.call-avatar.is-ringing::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid var(--glow-line);
+    animation: ringPulse 2.4s ease-out infinite;
+}
+
+.call-avatar.is-ringing::after {
+    animation-delay: 1.2s;
+}
+
+.incoming h2 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.incoming p {
+    color: var(--ink-muted);
+    margin-bottom: 60px;
+}
+
+.accept-btn {
+    padding: 18px 40px;
+    border-radius: var(--radius-pill);
+    background: var(--call-accept);
+    color: white;
+    font-size: 17px;
+    transition: .4s var(--ease-soft);
+}
+
+.accept-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(46, 204, 113, .3);
+}
+
+/* Live call screen */
+
+.active-call {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.big {
+    width: 150px;
+    height: 150px;
+    font-size: 65px;
+    margin-bottom: 25px;
+}
+
+.pulse-live {
+    animation: heartbeat 2.2s ease-in-out infinite;
+}
+
+#call-counter {
+    margin-top: 15px;
+    font-size: 38px;
+    font-family: var(--font-display);
+    letter-spacing: 3px;
+    color: var(--glow);
+}
+
+#subtitle {
+    margin-top: 60px;
+    font-size: 21px;
+    color: #ddd;
+    min-height: 60px;
+    text-align: center;
+    padding: 0 20px;
+    line-height: 1.8;
+    font-family: var(--font-display);
+}
+
+.call-ending {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.call-ending h2 {
+    font-size: clamp(30px, 5vw, 42px);
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+}
+
+.call-ending h1 {
+    font-size: clamp(38px, 7vw, 70px);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   Chapter 04 — Timeline
+========================================== */
+
+/* Timeline styles now live in chapters.css (redesigned, Stage 2) */
+
+
+/* ==========================================
+   Final Chapter — Ending
+========================================== */
+
+.ending {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #100c07 0%, #050505 55%, #000 100%);
+    padding: var(--space-2xl) 20px;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* The signature light returns, now calm and steady rather than a burst */
+.ending-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--glow-dim), transparent 60%);
+    animation: ambientDrift 10s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.ending-content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+}
+
+.ending-chapter {
+    display: inline-block;
+    color: var(--ink-faint);
+    letter-spacing: 3px;
+    font-size: .85rem;
+    margin-bottom: 25px;
+}
+
+.ending-content h2 {
+    font-size: clamp(42px, 7vw, 78px);
+    margin-bottom: 35px;
+    color: var(--glow-strong);
+}
+
+.ending-text {
+    color: var(--ink-muted);
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 2.1;
+    margin-bottom: 50px;
+}
+
+#restart-story {
+    padding: 18px 45px;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    font-size: 17px;
+    transition: .4s var(--ease-soft);
+}
+
+#restart-story:hover {
+    background: var(--glow);
+    border-color: var(--glow);
+    color: #1a1206;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px var(--glow-dim);
+}
+
+.final-room-heart{
+
+    font-size:120px;
+    line-height:1;
+    margin:30px 0 45px;
+
+    filter:
+        drop-shadow(0 0 20px rgba(255,80,110,.45))
+        drop-shadow(0 0 60px rgba(255,80,110,.25));
+
+    animation: heartBeat 2.8s ease-in-out infinite;
+
+}
+
+@keyframes heartBeat{
+
+    0%,100%{
+
+        transform:scale(1);
+
+    }
+
+    12%{
+
+        transform:scale(1.08);
+
+    }
+
+    22%{
+
+        transform:scale(.98);
+
+    }
+
+    32%{
+
+        transform:scale(1.12);
+
+    }
+
+    45%{
+
+        transform:scale(1);
+
+    }
+
+}

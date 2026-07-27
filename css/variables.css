@@ -1,0 +1,85 @@
+/* =========================================================
+   Project Hope — Design Tokens
+   A cinematic, warm-dark palette with one signature accent:
+   a candlelight amber that threads through the opening burst,
+   the timeline's connecting line, and the ending's glow.
+========================================================= */
+
+:root {
+
+    /* ---------- Color: surfaces ---------- */
+    --void: #050505;
+    --surface: #0a0a0a;
+    --surface-alt: #0d0d0d;
+    --surface-raised: rgba(255, 255, 255, .05);
+    --surface-raised-hover: rgba(255, 255, 255, .08);
+
+    /* ---------- Color: ink ---------- */
+    --ink: #f5f2ec;
+    --ink-muted: #9a9994;
+    --ink-faint: #6e6d69;
+
+    /* ---------- Color: lines ---------- */
+    --hairline: rgba(255, 255, 255, .08);
+    --hairline-soft: rgba(255, 255, 255, .05);
+
+    /* ---------- Color: signature accent (candlelight) ---------- */
+    --glow: #e8b36b;
+    --glow-strong: #f2c879;
+    --glow-soft: rgba(232, 179, 107, .35);
+    --glow-dim: rgba(232, 179, 107, .12);
+    --glow-line: rgba(232, 179, 107, .55);
+
+    /* ---------- Color: functional (kept brand-accurate) ---------- */
+    --chat-me: #3797f0;
+    --chat-her: #262626;
+    --call-accept: #2ecc71;
+    --call-gradient-a: #ff7eb3;
+    --call-gradient-b: #8b5cf6;
+
+    /* ---------- Typography ---------- */
+    --font-display: "Markazi Text", "Cormorant Garamond", serif;
+    --font-body: "Cairo", "Tajawal", Arial, sans-serif;
+
+    /* ---------- Spacing scale ---------- */
+    --space-2xs: 6px;
+    --space-xs: 12px;
+    --space-sm: 20px;
+    --space-md: 32px;
+    --space-lg: 56px;
+    --space-xl: 96px;
+    --space-2xl: 140px;
+
+    /* ---------- Radii ---------- */
+    --radius-sm: 12px;
+    --radius-md: 22px;
+    --radius-lg: 35px;
+    --radius-pill: 100px;
+
+    /* ---------- Easing ---------- */
+    --ease-out: cubic-bezier(.19, 1, .22, 1);
+    --ease-soft: cubic-bezier(.4, 0, .2, 1);
+
+    /* ---------- Shadows ---------- */
+    --shadow-soft: 0 25px 60px rgba(0, 0, 0, .45);
+    --shadow-deep: 0 30px 80px rgba(0, 0, 0, .55);
+    --shadow-glow: 0 0 40px var(--glow-dim);
+
+}
+
+/* Respect visitors who've asked for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+    }
+
+    html {
+        scroll-behavior: auto !important;
+    }
+
+}
